@@ -1,24 +1,23 @@
 import React from 'react';
-import SelectSearch, { useSelect } from 'react-select-search';
+import SelectSearch from 'react-select-search';
 import './SearchBar.css';
 
-const SearchBar = () => {
-
+const SearchBar = ({onChange}) => {
     return (
         <SelectSearch
-            options={[]}
             getOptions={(query) => {
                 return new Promise((resolve, reject) => {
-                    fetch(`http://www.omdbapi.com/?s=${query}&apikey=2e349fc0`)
+                    fetch(`https://api.themoviedb.org/3/search/movie?api_key=133f4d8b4fed128b27fa0bb407956c56&language=en-US&page=1&include_adult=false&query=${query}`)
                         .then(response => response.json())
-                        .then(({Search}) => {
-                            resolve(Search.map(({ Title, imdbID }) => ({ value: Title, name: Title })))
+                        .then(({results}) => {
+                            resolve(results.map(({ title }) => ({ value: title, name: title })))
                         })
                         .catch(reject);
                 });
             }}
             search
-            placeholder="Your favorite drink"
+            placeholder="Torrent to search"
+            onChange={onChange}
         />
     );
 }
