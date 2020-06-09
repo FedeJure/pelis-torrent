@@ -13,7 +13,14 @@ const SearchBar = ({onChange}) => {
                             `query=${query}`)
                         .then(response => response.json())
                         .then(({results}) => {
-                            resolve(results.map(({ title }) => ({ value: title, name: title })))
+                            console.log(results)
+                            resolve(results.map(({ title, vote_average, release_date, poster_path }) => ({ 
+                                value: title,
+                                date: release_date,
+                                vote: vote_average,
+                                image: poster_path,
+                                name: title 
+                            })))
                         })
                         .catch(reject);
                 });
@@ -21,17 +28,16 @@ const SearchBar = ({onChange}) => {
             search
             placeholder="Torrent to search"
             onChange={onChange}
-            renderOption={props =>
+            renderOption={(props, data) =>
             <div className="search-item">
                 <div>
-                    <img src="./logo192.png"/>
+                    <img src={data.image ? `https://image.tmdb.org/t/p/w500/${data.image}` : "./missing-file.png"}/>
                 </div>
                 <div>
                     <a>{props.value}</a>
                     <div className="search-item-description">
-                        <span>Author</span>
-                        <span>2020</span>
-                        <span>5</span>
+                        <span>{data.vote}</span>
+                        <span>{data.date}</span>
                     </div>
                 </div>
             </div>}

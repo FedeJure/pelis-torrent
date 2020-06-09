@@ -205,7 +205,8 @@
     flex-flow: row;
     justify-content: first baseline;
     justify-self: left;
-    width: 100%;
+    width: 90%;
+    height: fit-content;
     padding: 0.1em 0;
 }
 
@@ -218,7 +219,15 @@
 
 .search-item img {
     height: 50px;
+    width: 50px;
     transform: translateX(-25px);
+    align-self: center;
+    object-fit: cover;
+}
+
+.search-item a {
+    height: 0.5em;
+    overflow: hidden;
 }
 
 .search-item-description {
@@ -226,4 +235,5 @@
     flex-flow: row;
     justify-content: space-evenly;
     font-size: 0.8em;
+    height: 0.5em;
 }
