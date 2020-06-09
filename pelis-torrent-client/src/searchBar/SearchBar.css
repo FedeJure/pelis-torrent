@@ -205,9 +205,10 @@
     flex-flow: row;
     justify-content: first baseline;
     justify-self: left;
-    width: 90%;
+    width: 105%;
     height: fit-content;
     padding: 0.1em 0;
+    transform: translateX(-25px);
 }
 
 .search-item + div {
@@ -217,12 +218,14 @@
     align-items: center;
 }
 
-.search-item img {
+
+.search-item div img:first-child {
+    border-radius: 20%;
     height: 50px;
     width: 50px;
-    transform: translateX(-25px);
     align-self: center;
     object-fit: cover;
+    margin-right: 1em;
 }
 
 .search-item a {
@@ -233,7 +236,17 @@
 .search-item-description {
     display: flex;
     flex-flow: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     font-size: 0.8em;
     height: 0.5em;
 }
+
+.search-item-description span:last-child {
+    margin: 0 1em;
+}
+
+.rating-star {
+    height: 10px !important;
+    width: 10px !important;
+}
+

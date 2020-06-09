@@ -28,19 +28,20 @@ const SearchBar = ({onChange}) => {
             search
             placeholder="Torrent to search"
             onChange={onChange}
-            renderOption={(props, data) =>
-            <div className="search-item">
+            renderOption={(props, data, snapshot, className) =>
+            <button {...props} className={`${className} search-item`} type="button" >
                 <div>
                     <img src={data.image ? `https://image.tmdb.org/t/p/w500/${data.image}` : "./missing-file.png"}/>
                 </div>
-                <div>
+                <div className="search-item-description-container">
                     <a>{props.value}</a>
                     <div className="search-item-description">
-                        <span>{data.vote}</span>
+                        <span>{data.vote}<img className="rating-star" src="./star.png"/></span>
+                        
                         <span>{data.date}</span>
                     </div>
                 </div>
-            </div>}
+            </button>}
         />
     );
 }
