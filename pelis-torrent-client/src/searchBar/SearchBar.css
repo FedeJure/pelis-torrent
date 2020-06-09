@@ -199,3 +199,31 @@
     border-top: 1px solid #eee;
     border-radius: 0 0 3px 3px;
 }
+
+.search-item {
+    display: flex;
+    flex-flow: row;
+    justify-content: first baseline;
+    justify-self: left;
+    width: 100%;
+    padding: 0.1em 0;
+}
+
+.search-item + div {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-item img {
+    height: 50px;
+    transform: translateX(-25px);
+}
+
+.search-item-description {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    font-size: 0.8em;
+}
