@@ -13,14 +13,14 @@ const SearchBar = ({onChange}) => {
                             `query=${query}`)
                         .then(response => response.json())
                         .then(({results}) => {
-                            console.log(results)
-                            resolve(results.map(({ title, vote_average, release_date, poster_path }) => ({ 
+                            const movie = results.map(({ title, vote_average, release_date, poster_path }) => ({ 
                                 value: title,
                                 date: release_date,
                                 vote: vote_average,
                                 image: poster_path,
                                 name: title 
-                            })))
+                            }));
+                            resolve(movie)
                         })
                         .catch(reject);
                 });

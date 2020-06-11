@@ -1,0 +1,35 @@
+@media only screen and (max-width: 600px) {
+    .movie-selector {
+        width: 90%;
+        border: 1px solid grey;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .movie-selector {
+        width: 50%;
+        border: 1px solid grey;
+    }
+}
+
+.movie-selector .header {
+    padding: .5em;
+    display: flex;
+    justify-content: space-evenly;
+    height: 10em;
+    background-color: gainsboro;
+}
+
+.movie-selector .options {
+    height: 15em;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.movie-selector .options button {
+    display: flex;
+    
+}

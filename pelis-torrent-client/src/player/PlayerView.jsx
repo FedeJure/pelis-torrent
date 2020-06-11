@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './PlayerView.css';
 
-const PlayerView = ({torrentId}) => {
+const PlayerView = ({torrentId, poster}) => {
 
   const container = <div id="player" className="PlayerView"></div>;
 
@@ -17,18 +17,8 @@ const PlayerView = ({torrentId}) => {
                 console.log('Torrent error!')
             }
         },
-        poster: 'https://via.placeholder.com/150/0000FF/808080?Text=Sintel',
-        subtitles: [
-            {
-                srclang: 'en',
-                label: 'test',
-                src: 'https://raw.githubusercontent.com/andreyvit/subtitle-tools/master/sample.srt',
-            }
-        ],
+        poster: 'https://via.placeholder.com/150/0000FF/808080?Text=Sintel'
     };
-    // document.getElementsByTagName("iframe")[0]
-    //         .filter(iframe => iframe.id.includes("webtor"))
-    //         .forEach(player => player.parentNode.removeChild(player));
     
     document.getElementById("player").childNodes.forEach(node => {
       if (node.id.includes("webtor")) node.parentNode.removeChild(node)
