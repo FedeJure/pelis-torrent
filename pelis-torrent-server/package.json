@@ -21,6 +21,7 @@
     "fastify-autoload": "^1.2.2",
     "fastify-cors": "^3.0.3",
     "fastify-plugin": "^1.6.1",
+    "fuzzyset.js": "^1.0.5",
     "is-docker": "^2.0.0",
     "make-promises-safe": "^5.1.0",
     "pino-colada": "^1.6.1",
