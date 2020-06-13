@@ -3,23 +3,32 @@ import SelectSearch from 'react-select-search';
 import './SearchBar.css';
 
 const SearchBar = ({onChange}) => {
+    var values = {};
     return (
         <SelectSearch
+        options={[]}
             getOptions={(query) => {
                 return new Promise((resolve, reject) => {
-                    fetch(`https://api.themoviedb.org/3/search/movie?`+
-                            `api_key=133f4d8b4fed128b27fa0bb407956c56&`+
-                            `language=en-US&page=1&include_adult=false&`+
-                            `query=${query}`)
+                    fetch(`https://yts.mx/api/v2/list_movies.json?query_term=${query}&sort_by=name`)
                         .then(response => response.json())
-                        .then(({results}) => {
-                            const movie = results.map(({ title, vote_average, release_date, poster_path }) => ({ 
-                                value: title,
-                                date: release_date,
-                                vote: vote_average,
-                                image: poster_path,
-                                name: title 
-                            }));
+                        .then(({data}) => {
+                            values = {};
+                            const movie = data.movies.map(({ title,
+                                                            rating,
+                                                            year,
+                                                            medium_cover_image,
+                                                            large_cover_image,
+                                                            torrents }) =>  {
+                                values[title] = {title, image: large_cover_image, torrents};
+                                return { 
+                                    value: title,
+                                    date: year,
+                                    vote: rating,
+                                    image: medium_cover_image,
+                                    name: title };
+
+                            });
+
                             resolve(movie)
                         })
                         .catch(reject);
@@ -27,14 +36,15 @@ const SearchBar = ({onChange}) => {
             }}
             search
             placeholder="Torrent to search"
-            onChange={onChange}
+            onChange={value => onChange(values[value])}
+            printOptions="on-focus"
             renderOption={(props, data, snapshot, className) =>
-            <button {...props} className={`${className} search-item`} type="button" >
+            <button id={data.name} {...props} className={`${className} search-item`} type="button" >
                 <div>
-                    <img src={data.image ? `https://image.tmdb.org/t/p/w500/${data.image}` : "./missing-file.png"}/>
+                    <img src={data.image ? `${data.image}` : "./missing-file.png"}/>
                 </div>
                 <div className="search-item-description-container">
-                    <a>{props.value}</a>
+                    <a>{data.name}</a>
                     <div className="search-item-description">
                         <span>{data.vote}<img className="rating-star" src="./star.png"/></span>
                         

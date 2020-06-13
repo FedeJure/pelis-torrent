@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Selector.css";
 
-const Selector = ({torrents, setTorrentId}) => {
+const Selector = ({torrents, setTorrent}) => {
     return (
         <div className="movie-selector">
             <div className="header">
@@ -12,7 +12,7 @@ const Selector = ({torrents, setTorrentId}) => {
                 </div>
             </div>
             <div className="options">
-                {torrents.map(torrent => <button onClick={() => setTorrentId(torrent.magnet)}><span className="text">{torrent.title}</span></button>)}
+                {torrents.map(torrent => <button key={torrent.hash} onClick={() => setTorrent(torrent)}><span className="text">{torrent.quality}</span></button>)}
             </div>
         </div>
     );

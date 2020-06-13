@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './PlayerView.css';
 
-const PlayerView = ({torrentId, poster}) => {
+const PlayerView = ({torrentId, image}) => {
 
   const container = <div id="player" className="PlayerView"></div>;
 
@@ -17,7 +17,7 @@ const PlayerView = ({torrentId, poster}) => {
                 console.log('Torrent error!')
             }
         },
-        poster: 'https://via.placeholder.com/150/0000FF/808080?Text=Sintel'
+        poster: image
     };
     
     document.getElementById("player").childNodes.forEach(node => {
