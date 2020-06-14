@@ -3,13 +3,13 @@ import SelectSearch from "react-select-search";
 import "./SearchBar.css";
 import { searchMovies, getTmdbImgPath } from '../api'
 
-const SearchBar = ({ onChange }) => {
+const SearchBar = ({ onChange, language }) => {
     return (
         <SelectSearch
             options={[]}
             getOptions={query => {
                 return new Promise(async (resolve, reject) => {
-                    const { results } = await searchMovies(query);
+                    const { results } = await searchMovies(query, language);
                     const movie = results.map(
                         ({
                             title,

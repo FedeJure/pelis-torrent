@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from 'react-select'
 import "./App.css";
 import PlayerView from "../player/PlayerView";
 import SearchBar from "../searchBar/SearchBar";
@@ -7,6 +8,7 @@ import { getImdbId, getMovieCompleteData } from '../api'
 import { getMovieDto } from '../domain/movie'
 
 function App() {
+  const [language, setLanguage] = useState('en-US');
   const [torrent, setTorrent] = useState({});
   const [selectedMovie, setSelectedMovie] = useState({});
 
@@ -17,12 +19,22 @@ function App() {
       setSelectedMovie(getMovieDto(data.movies[0]));
   };
 
+  const onSelectLanguage = selected => {
+    setLanguage(selected.value);
+  }
+
   const showSelector =
     selectedMovie.torrents && selectedMovie.torrents.length > 0;
   const showPlayer = torrent.hash;
+
+  const languages = [
+    { value: 'en-US', label: 'English' },
+    { value: 'es-ES', label: 'Español' }
+  ]
   return (
     <div className="App">
-      <SearchBar onChange={onChange} className="searchBar" />
+      <Select options={languages} onChange={onSelectLanguage}/>
+      <SearchBar onChange={onChange} language={language} className="searchBar" />
       {showSelector && (
         <Selector
           image={selectedMovie.image}
