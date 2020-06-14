@@ -3,13 +3,18 @@ import "./App.css";
 import PlayerView from "../player/PlayerView";
 import SearchBar from "../searchBar/SearchBar";
 import Selector from "../selector/Selector";
+import { getImdbId, getMovieCompleteData } from '../api'
+import { getMovieDto } from '../domain/movie'
 
 function App() {
   const [torrent, setTorrent] = useState({});
   const [selectedMovie, setSelectedMovie] = useState({});
 
-  const onChange = selectedMovie => {
-    setSelectedMovie(selectedMovie);
+  const onChange = async movieId => {
+    const { imdb_id } = await getImdbId(movieId);
+    const { data } = await getMovieCompleteData(imdb_id);
+    if (data.movies.length > 0)
+      setSelectedMovie(getMovieDto(data.movies[0]));
   };
 
   const showSelector =
